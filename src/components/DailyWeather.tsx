@@ -33,7 +33,7 @@ const DailyWeather: FC = () => {
   const fetchForecastData = async (city: string) => {
     const response = await axios.get(`${URL}/forecast.json`, {
       params: {
-        key: "6909915ba3164cf6a83131706232801",
+        key: import.meta.env.VITE_API_KEY,
         q: city,
         days: "3",
       },
