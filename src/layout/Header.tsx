@@ -17,7 +17,7 @@ const Header = () => {
     const city = e.target.value;
     if (city.length < 2) return;
 
-    const URL = "http://api.weatherapi.com/v1/search.json";
+    const URL = "https://api.weatherapi.com/v1/search.json";
     await axios
       .get(URL, {
         params: {

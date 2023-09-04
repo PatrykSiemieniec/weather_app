@@ -11,7 +11,7 @@ import { refreshLocalStorage } from "../store/citySlice";
 const Home = () => {
   const [nameOfDay, setNameOfDay] = useState<string>("");
 
-  let URL = "http://api.weatherapi.com/v1";
+  let URL = "https://api.weatherapi.com/v1";
   const city = useSelector((state: RootState) => state.city.city);
   const dispatch = useDispatch();
 

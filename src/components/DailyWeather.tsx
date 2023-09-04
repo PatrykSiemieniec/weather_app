@@ -26,7 +26,7 @@ interface DailyWeatherItemsProps {
 }
 
 const DailyWeather: FC = () => {
-  let URL = "http://api.weatherapi.com/v1";
+  let URL = "https://api.weatherapi.com/v1";
 
   const city = useSelector((state: RootState) => state.city.city);
 
