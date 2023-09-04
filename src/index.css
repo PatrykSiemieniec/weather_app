@@ -4,4 +4,13 @@
 
 body {
   background-color: rgb(148 163 184);
+  font-family: "Nunito Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }

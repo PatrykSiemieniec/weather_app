@@ -1,77 +1,136 @@
-import React, { useState, useEffect } from "react";
+import { useState, FC } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import type { RootState } from "../store/store";
+import {
+  TbSunset,
+  TbSunrise,
+  TbTemperature,
+  TbUvIndex,
+  TbWind,
+} from "react-icons/tb";
+import getNameOfDay from "../utils/getNameOfDay";
+import { useQuery } from "react-query";
+import { forecast } from "../types";
 
-const DailyWeather = (props: any) => {
+interface DailyWeatherItemsProps {
+  icon: string;
+  date: string;
+  minTemp: number;
+  maxTemp: number;
+  nameOfDay: string;
+  sunrise: string;
+  sunset: string;
+  uv: number;
+  maxwind_kph: number;
+}
+
+const DailyWeather: FC = () => {
   let URL = "http://api.weatherapi.com/v1";
-  const [forecastData, setForecastData] = useState<any>([]);
-  const [selectedData, setSelectedData] = useState<any>();
-  let data: any = [];
-  let days: number = props.days;
 
-  const getData = () => {
-    axios
-      .get(`${URL}/forecast.json`, {
-        params: {
-          key: "6909915ba3164cf6a83131706232801",
-          q: "Skarzysko-Kamienna",
-          days: days,
-        },
-      })
-      .then((res) => {
-        const response = res.data.forecast.forecastday;
-        let index = 0;
-        for (const key in response) {
-          data.push({
-            id: index++,
-            icon: response[key]?.day?.condition?.icon,
-            date: response[key]?.date,
-            maxTemp: response[key]?.day?.maxtemp_c,
-            minTemp: response[key]?.day?.mintemp_c,
-          });
-        }
-        console.log(response);
-        setForecastData(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  const city = useSelector((state: RootState) => state.city.city);
+
+  const fetchForecastData = async (city: string) => {
+    const response = await axios.get(`${URL}/forecast.json`, {
+      params: {
+        key: "6909915ba3164cf6a83131706232801",
+        q: city,
+        days: "3",
+      },
+    });
+
+    const forecast = response.data.forecast.forecastday.slice(1, 3);
+    return forecast;
   };
+  const { isLoading, data, error } = useQuery(["forecast", city], () =>
+    fetchForecastData(city)
+  );
 
-  useEffect(() => {
-    getData();
-  }, [days]);
+  if (isLoading) return <p>Loading...</p>;
 
-  const handleClick = (data: any) => {
-    setSelectedData(data);
-    console.log(selectedData);
-  };
-  const displayForecast = forecastData.map((item: any, idx: number) => (
-    <DailyWeatherItems
-      key={idx}
-      id={item.id}
-      icon={item.icon}
-      minTemp={item.minTemp}
-      maxTemp={item.maxTemp}
-      date={item.date}
-      onClick={() => handleClick(item)}
-    />
-  ));
-  return <div className="flex gap-1 p-2">{displayForecast}</div>;
+  return (
+    <div className="flex gap-1 p-2 flex-col">
+      {data?.map((item: forecast) => (
+        <DailyWeatherItems
+          key={item.date_epoch}
+          icon={item.day.condition.icon}
+          nameOfDay={getNameOfDay(item.date)}
+          minTemp={item.day.mintemp_c}
+          maxTemp={item.day.maxtemp_c}
+          date={item.date}
+          sunset={item.astro.sunset}
+          sunrise={item.astro.sunrise}
+          uv={item.day.uv}
+          maxwind_kph={item.day.maxwind_kph}
+        />
+      ))}
+    </div>
+  );
 };
 
-const DailyWeatherItems = (props: any) => {
+const DailyWeatherItems: FC<DailyWeatherItemsProps> = (props) => {
   return (
-    <div className="w-full h-80 bg-slate-200">
-      <div
-        className="flex flex-col text-center cursor-pointer"
-        onClick={props.onClick}
-      >
-        <img src={props.icon} />
-        <div>min. {props.minTemp}°C</div>
-        <div>max. {props.maxTemp}°C</div>
-        <div>
-          <b>{props.date}</b>
-        </div>
+    <div className=" bg-white bg-opacity-20 p-3  rounded backdrop-blur-lg drop-shadow-lg flex flex-wrap w-full justify-center flex-col items-center ">
+      <div className="flex text-center flex-col gap-3 w-64 ">
+        <section className="flex justify-around">
+          <img style={{ width: "100px", height: "100px" }} src={props.icon} />
+          <div>
+            <div className="flex flex-col items-center">
+              <b className=" text-lg">{props.nameOfDay}</b>
+              <em className=" text-sm">{props.date}</em>
+            </div>
+            <div className="flex gap-1 items-center">
+              <TbTemperature
+                style={{
+                  fontSize: "1.4rem",
+                }}
+              />
+              <span className="text-xl">{props.maxTemp}°C</span>
+              <span className="text-sm">
+                {props.minTemp}
+                °C
+              </span>
+            </div>
+            <div className="flex justify-around">
+              <div className="flex">
+                <TbWind
+                  style={{
+                    fontSize: "1.4rem",
+                  }}
+                />
+                {props.maxwind_kph} km/h
+              </div>
+              <div className="flex gap-1 items-center">
+                <TbUvIndex
+                  style={{
+                    fontSize: "1.4rem",
+                  }}
+                />
+                {props.uv}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="flex justify-evenly">
+          <span className="flex">
+            <TbSunset
+              style={{
+                fontSize: "1.4rem",
+              }}
+            />
+            {props.sunset}
+          </span>
+
+          <span className="flex">
+            <TbSunrise
+              style={{
+                fontSize: "1.4rem",
+              }}
+            />
+            {props.sunrise}
+          </span>
+        </section>
       </div>
     </div>
   );

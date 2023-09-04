@@ -1,92 +1,100 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import DailyWeather from "./DailyWeather";
+import SavedLocations from "./SavedLocations";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import type { RootState } from "../store/store";
+import { useQuery } from "react-query";
+import getNameOfDay from "../utils/getNameOfDay";
+import { useDispatch } from "react-redux/es/exports";
+import { refreshLocalStorage } from "../store/citySlice";
 const Home = () => {
-  let URL = "http://api.weatherapi.com/v1";
-  const [currentWeather, setCurrentWeather] = useState<any>({});
-  const [days, setDays] = useState<number>(14);
+  const [nameOfDay, setNameOfDay] = useState<string>("");
 
-  const getCurrentWeather = async () => {
-    await axios
-      .get(`${URL}/current.json`, {
-        params: {
-          key: "6909915ba3164cf6a83131706232801",
-          q: "Skarzysko-Kamienna",
-        },
-      })
-      .then((res) => setCurrentWeather(res.data))
-      .catch((error) => console.log(error));
-    console.log(currentWeather);
+  let URL = "http://api.weatherapi.com/v1";
+  const city = useSelector((state: RootState) => state.city.city);
+  const dispatch = useDispatch();
+
+  const fetchWeatherData = async (city: string) => {
+    const response = await axios.get(`${URL}/current.json`, {
+      params: {
+        key: "6909915ba3164cf6a83131706232801",
+        q: city,
+      },
+    });
+    setNameOfDay(getNameOfDay(response.data?.current?.last_updated));
+    return response.data;
+  };
+  const { isLoading, data, error, isError } = useQuery(
+    ["currentWeather", city],
+    () => fetchWeatherData(city)
+  );
+
+  const saveCity = (city: string) => {
+    const cities = localStorage.getItem("cities");
+    if (cities) {
+      let prevLocalStorage = JSON.parse(cities);
+
+      prevLocalStorage[city] = city;
+
+      localStorage.setItem("cities", JSON.stringify(prevLocalStorage));
+      dispatch(refreshLocalStorage());
+    }
   };
 
-  useEffect(() => {
-    getCurrentWeather();
-  }, []);
-
   return (
-    <div className="flex w-screen h-auto justify-center">
-      <div className="grid grid-rows-7 grid-cols-6 gap-4 p-7 w-4/5 bor">
-        <div className="col-span-4 row-span-4 bg-slate-50 p-8 ">
-          <p className="text-2xl">Pogoda dzisiaj</p>
-          <div className="flex justify-end gap-10">
-            <div className="text-xl">
-              <p className="text-xl">Twoja lokalizacja</p>
-              <h1 className="text-3xl">{currentWeather?.location?.name}</h1>
+    <div className="flex flex-col gap-4 justify-center md:flex-row p-2">
+      <section className="bg-white p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg ">
+        <p className="text-xl pb-8 lg:text-3xl">
+          Pogoda dzisiaj, <b>{nameOfDay}</b>{" "}
+        </p>
 
-              <div className="flex items-center ">
-                <img
-                  className="w-48"
-                  src={currentWeather?.current?.condition?.icon}
-                ></img>
-                <p>{currentWeather?.current?.condition?.text}</p>
+        <div className="flex flex-col justify-end gap-10 sm:flex-row ">
+          <div className="text-xl">
+            <p className="text-xl">Twoja lokalizacja</p>
+            <div className="flex gap-2 items-center">
+              <h1 className="text-4xl">{data?.location?.name}</h1>
+              <button
+                onClick={() => saveCity(data?.location?.name)}
+                className="bg-white p-1 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg cursor-pointer text-sm"
+              >
+                Zapisz
+              </button>
+            </div>
+
+            <div className="flex items-center ">
+              <img className=" w-32" src={data?.current?.condition?.icon}></img>
+              <p>{data?.current?.condition?.text}</p>
+            </div>
+          </div>
+          <div>
+            <h2 className=" text-lg">
+              Temperatura:
+              <div className=" text-2xl font-bold">
+                {data?.current?.temp_c} °C
               </div>
-            </div>
-            <div>
-              <h2 className=" text-lg">
-                Temperatura:
-                <div className=" text-2xl font-bold">
-                  {currentWeather?.current?.temp_c} °C
-                </div>
-              </h2>
-              <h3>
-                Temperatura odczuwalna: {currentWeather?.current?.feelslike_c}{" "}
-                °C
-              </h3>
-              <h2>
-                Wiatr: {currentWeather?.current?.wind_kph}kph, kierunek:{" "}
-                {currentWeather?.current?.wind_dir}
-              </h2>
-              <h2>
-                Ostatnia aktualizacja: {currentWeather?.current?.last_updated}
-              </h2>
-            </div>
+            </h2>
+            <h3>Temperatura odczuwalna: {data?.current?.feelslike_c} °C</h3>
+            <h2>
+              Wiatr: {data?.current?.wind_kph}km/h, kierunek:{" "}
+              {data?.current?.wind_dir}
+            </h2>
+            <h2>Ostatnia aktualizacja: {data?.current?.last_updated}</h2>
           </div>
         </div>
-        <div className="col-span-2 row-span-2 bg-slate-50">Saved locations</div>
-        <div className="col-span-2 row-span-2 bg-slate-50">Sugested</div>
-        <div className="col-span-6 row-span-3 bg-slate-50 flex gap-2 p-4 overflow-auto flex-col">
-          <div className="flex gap-4 ">
-            <p className=" text-2xl">
-              Prognoza długoterminowa {"("}
-              {days}
-              {")"} dni{" "}
-            </p>
-            <button
-              onClick={() => setDays(7)}
-              className=" rounded-full  bg-slate-300 w-20"
-            >
-              7 dni
-            </button>
-            <button
-              onClick={() => setDays(14)}
-              className=" rounded-full  bg-slate-300 w-20"
-            >
-              14 dni
-            </button>
-          </div>
-          <DailyWeather days={days} />
+        <section className="bg-white p-4 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg flex flex-wrap max-w-xl">
+          <p> Zapisane miasta </p>
+          <br />
+          <SavedLocations />
+        </section>
+      </section>
+
+      <section className="bg-white p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg ">
+        <div className="flex gap-4 flex-col ">
+          <p className=" text-xl lg:text-2xl">Prognoza na kolejne dni</p>
         </div>
-      </div>
+        <DailyWeather />
+      </section>
     </div>
   );
 };
