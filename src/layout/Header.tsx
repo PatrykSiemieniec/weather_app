@@ -21,7 +21,7 @@ const Header = () => {
     await axios
       .get(URL, {
         params: {
-          key: "6909915ba3164cf6a83131706232801",
+          key: import.meta.env.VITE_API_KEY,
           q: city,
         },
       })
