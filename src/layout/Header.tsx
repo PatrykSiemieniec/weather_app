@@ -39,6 +39,7 @@ const Header = () => {
         </NavLink>
         <div>
           <input
+            onReset={() => console.log("xd")}
             onChange={searchAndAutocomplete}
             type="search"
             className=" h-10 w-48 p-4 text-black"
@@ -46,22 +47,26 @@ const Header = () => {
             value={inputValue}
           />
           <div className="flex flex-col absolute min-w-48 bg-white text-black  z-50">
-            {suggestedCity.map((item) => (
-              <span
-                onClick={() => {
-                  dispatch(choseCity(item.name));
-                  setSuggestedCity([]);
-                  setInputValue("");
-                }}
-                className="p-2 cursor-pointer"
-                key={item.id}
-              >
-                {item.name}{" "}
-                <sub className=" text-slate-500">{item.country}</sub>
-              </span>
-            ))}
+            {inputValue &&
+              suggestedCity.map((item) => (
+                <span
+                  onClick={() => {
+                    dispatch(choseCity(item.name));
+                    setSuggestedCity([]);
+                    setInputValue("");
+                  }}
+                  className="p-2 cursor-pointer"
+                  key={item.id}
+                >
+                  {item.name}{" "}
+                  <sub className=" text-slate-500">{item.country}</sub>
+                </span>
+              ))}
           </div>
         </div>
+        <NavLink to="/hourly" className="text-xl lg:text-2xl">
+          <b>Pogoda godzinowa</b>
+        </NavLink>
       </div>
     </div>
   );

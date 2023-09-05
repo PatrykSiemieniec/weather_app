@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./layout/Header";
 
 import Home from "./components/Home";
+import HourlyWeather from "./components/HourlyWeather";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/daily" element={<Home />}></Route>
+          <Route path="/hourly" element={<HourlyWeather />}></Route>
         </Routes>
       </main>
     </div>

@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import getNameOfDay from "../utils/getNameOfDay";
 import { useDispatch } from "react-redux/es/exports";
 import { refreshLocalStorage } from "../store/citySlice";
+import HourlyWeather from "./HourlyWeather";
 const Home = () => {
   const [nameOfDay, setNameOfDay] = useState<string>("");
 

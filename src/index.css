@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 body {
-  background-color: rgb(148 163 184);
+  background-color: rgb(210, 217, 225);
+  /* background-color: white; */
+
   font-family: "Nunito Sans", sans-serif;
   font-family: "Roboto", sans-serif;
 }

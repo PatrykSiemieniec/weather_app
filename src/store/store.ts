@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cityReducer from "./citySlice";
+import forecastReducer from "./forecastSlice";
 // if ("geolocation" in navigator) {
 //   navigator.geolocation.getCurrentPosition(
 //     function (position) {
@@ -34,6 +35,7 @@ import cityReducer from "./citySlice";
 export const store = configureStore({
   reducer: {
     city: cityReducer,
+    forecast: forecastReducer,
   },
 });
 

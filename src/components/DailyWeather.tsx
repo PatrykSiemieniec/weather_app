@@ -1,6 +1,8 @@
-import { useState, FC } from "react";
+import { FC } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { setHoursData } from "../store/forecastSlice";
 import type { RootState } from "../store/store";
 import {
   TbSunset,
@@ -26,6 +28,7 @@ interface DailyWeatherItemsProps {
 }
 
 const DailyWeather: FC = () => {
+  const dispatch = useDispatch();
   let URL = "https://api.weatherapi.com/v1";
 
   const city = useSelector((state: RootState) => state.city.city);
@@ -39,12 +42,14 @@ const DailyWeather: FC = () => {
       },
     });
 
+    dispatch(setHoursData(response.data.forecast.forecastday));
     const forecast = response.data.forecast.forecastday.slice(1, 3);
     return forecast;
   };
   const { isLoading, data, error } = useQuery(["forecast", city], () =>
     fetchForecastData(city)
   );
+  console.log(data);
 
   if (isLoading) return <p>Loading...</p>;
 
