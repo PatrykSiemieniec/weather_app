@@ -8,7 +8,6 @@ import { useQuery } from "react-query";
 import getNameOfDay from "../utils/getNameOfDay";
 import { useDispatch } from "react-redux/es/exports";
 import { refreshLocalStorage } from "../store/citySlice";
-import HourlyWeather from "./HourlyWeather";
 const Home = () => {
   const [nameOfDay, setNameOfDay] = useState<string>("");
 
@@ -44,22 +43,22 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 justify-center md:flex-row p-2">
-      <section className="bg-white p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg ">
+    <div className="flex flex-col gap-4 justify-center md:flex-row p-2 text-white">
+      <section className=" bg-sky p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg ">
         <p className="text-xl pb-8 lg:text-3xl">
-          Pogoda dzisiaj, <b>{nameOfDay}</b>{" "}
+          Current Weather, <b>{nameOfDay}</b>{" "}
         </p>
 
-        <div className="flex flex-col justify-end gap-10 sm:flex-row ">
+        <div className="flex flex-col justify-evenly gap-10 sm:flex-row ">
           <div className="text-xl">
-            <p className="text-xl">Twoja lokalizacja</p>
+            <p className="text-xl">Your location</p>
             <div className="flex gap-2 items-center">
               <h1 className="text-4xl">{data?.location?.name}</h1>
               <button
                 onClick={() => saveCity(data?.location?.name)}
-                className="bg-white p-1 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg cursor-pointer text-sm"
+                className="bg-white p-1 bg-opacity-20  rounded backdrop-blur-lg  cursor-pointer text-sm"
               >
-                Zapisz
+                Save
               </button>
             </div>
 
@@ -70,29 +69,29 @@ const Home = () => {
           </div>
           <div>
             <h2 className=" text-lg">
-              Temperatura:
+              Temperature:
               <div className=" text-2xl font-bold">
                 {data?.current?.temp_c} °C
               </div>
             </h2>
-            <h3>Temperatura odczuwalna: {data?.current?.feelslike_c} °C</h3>
+            <h3>Perceived temperature: {data?.current?.feelslike_c} °C</h3>
             <h2>
-              Wiatr: {data?.current?.wind_kph}km/h, kierunek:{" "}
+              Wind: {data?.current?.wind_kph}kph, direction:{" "}
               {data?.current?.wind_dir}
             </h2>
-            <h2>Ostatnia aktualizacja: {data?.current?.last_updated}</h2>
+            <h2>Last update: {data?.current?.last_updated}</h2>
           </div>
         </div>
         <section className="bg-white p-4 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg flex flex-wrap max-w-xl">
-          <p> Zapisane miasta </p>
+          <p className="w-full text-lg"> Saved cities </p>
           <br />
           <SavedLocations />
         </section>
       </section>
 
-      <section className="bg-white p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg ">
+      <section className="bg-sky p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg ">
         <div className="flex gap-4 flex-col ">
-          <p className=" text-xl lg:text-2xl">Prognoza na kolejne dni</p>
+          <p className=" text-xl lg:text-2xl">Forecast</p>
         </div>
         <DailyWeather />
       </section>

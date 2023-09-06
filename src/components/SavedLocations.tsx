@@ -42,7 +42,7 @@ const SavedLocations: FC = () => {
       {cities.map((item) => (
         <div
           key={item}
-          className=" bg-white  bg-opacity-20  backdrop-blur-lg drop-shadow-lg rounded-xl pl-3 pr-3 border border-black flex gap-4 "
+          className=" bg-white  bg-opacity-20  backdrop-blur-lg rounded-xl pl-3 pr-3 border border-black flex gap-4 text-black "
         >
           <button onClick={() => setCity(item)}>{item}</button>
           <button onClick={() => deleteSavedCity(item)}>x</button>

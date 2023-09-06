@@ -2,13 +2,13 @@ const getNameOfDay = (date: Date | string | number) => {
   const dayNumber = new Date(date).getDay();
 
   const weekDays = [
-    "Poniedziałek",
-    "Wtorek",
-    "Środa",
-    "Czwartek",
-    "Piątek",
-    "Sobota",
-    "Niedziela",
+    "Monday",
+    "Tueasday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
   ];
 
   return weekDays[dayNumber];

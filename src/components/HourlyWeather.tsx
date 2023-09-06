@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { RootState } from "../store/store";
 import axios from "axios";
@@ -42,10 +42,12 @@ export const options = {
 
 const HourlyWeather: FC = () => {
   const [day, setDay] = useState<number>(0);
-  // const [labels,setLabels] = useState();
-  // const [tempDay,setTempDay] = useState();
-  // const [chanceoOfRainDay,setChanceOfRainDay] = useState();
-  // const [windDay,setWindDay] = useState();
+  const todayButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    todayButtonRef.current?.focus();
+  }, []);
+
   let URL = "https://api.weatherapi.com/v1";
 
   const city = useSelector((state: RootState) => state.city.city);
@@ -94,7 +96,7 @@ const HourlyWeather: FC = () => {
     labels,
     datasets: [
       {
-        label: "Temperatura",
+        label: "Temperature",
         data: tempDay,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -105,7 +107,7 @@ const HourlyWeather: FC = () => {
     labels,
     datasets: [
       {
-        label: "Szansa na opady deszczu ",
+        label: "Chance of rain",
         data: chanceOfRainDay,
         borderColor: "blue",
         backgroundColor: "lightblue",
@@ -116,7 +118,7 @@ const HourlyWeather: FC = () => {
     labels,
     datasets: [
       {
-        label: "Wiatr km/h",
+        label: "Wind kph",
         data: windDay,
         borderColor: "grey",
         backgroundColor: "lightgrey",
@@ -129,26 +131,27 @@ const HourlyWeather: FC = () => {
       <div className="lg:w-750">
         <p className=" text-center text-3xl">
           {" "}
-          Pogoda godzinowa <b>{city}</b>
+          Hourly Weather <b>{city}</b>
         </p>
         <div className="flex gap-5 justify-center">
           <button
+            ref={todayButtonRef}
             className="bg-white p-2 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg focus:bg-green-400 "
             onClick={() => setDay(0)}
           >
-            Dzisiaj
+            Today
           </button>
           <button
             className="bg-white p-2 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg  focus:bg-green-400"
             onClick={() => setDay(1)}
           >
-            Jutro
+            Tommorow
           </button>
           <button
             className="bg-white p-2 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg  focus:bg-green-400"
             onClick={() => setDay(2)}
           >
-            Pojutrze
+            The day after tomorrow
           </button>
         </div>
 
