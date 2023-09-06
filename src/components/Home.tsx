@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import getNameOfDay from "../utils/getNameOfDay";
 import { useDispatch } from "react-redux/es/exports";
 import { refreshLocalStorage } from "../store/citySlice";
+import background from "../assets/sky.jpg";
 const Home = () => {
   const [nameOfDay, setNameOfDay] = useState<string>("");
 
@@ -44,7 +45,10 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-4 justify-center md:flex-row p-2 text-white">
-      <section className=" bg-sky p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg ">
+      <section
+        style={{ backgroundImage: `url(${background})` }}
+        className="p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg "
+      >
         <p className="text-xl pb-8 lg:text-3xl">
           Current Weather, <b>{nameOfDay}</b>{" "}
         </p>
@@ -89,7 +93,10 @@ const Home = () => {
         </section>
       </section>
 
-      <section className="bg-sky p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg ">
+      <section
+        style={{ backgroundImage: `url(${background})` }}
+        className=" p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg "
+      >
         <div className="flex gap-4 flex-col ">
           <p className=" text-xl lg:text-2xl">Forecast</p>
         </div>

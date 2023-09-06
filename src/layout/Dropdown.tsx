@@ -2,6 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
+import background from "../assets/sky.jpg";
 function Dropdown() {
   return (
     <Menu>
@@ -17,7 +18,10 @@ function Dropdown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className=" flex flex-col gap-1 p-1  fixed z-50 right-4  bg-sky bg-opacity-50 text-white rounded-lg border ">
+        <Menu.Items
+          style={{ backgroundImage: `url(${background})` }}
+          className=" flex flex-col gap-1 p-1  fixed z-50 right-4 bg-opacity-50 text-white rounded-lg border "
+        >
           <Menu.Item>
             <NavLink
               to="/hourly"
