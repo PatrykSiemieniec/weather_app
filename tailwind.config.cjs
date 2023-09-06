@@ -14,7 +14,7 @@ module.exports = {
         '750': '750px'
       },
       backgroundImage: {
-        'sky': "url(./src/assets/sky.jpg)"
+        'sky': "url(sky.jpg)"
       }
 
     },
