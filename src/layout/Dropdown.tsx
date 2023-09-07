@@ -59,7 +59,7 @@ function Dropdown() {
 
           <Menu.Item disabled>
             <NavLink
-              to="/hourly"
+              to="/historical"
               className="text-xl lg:text-2xl p-1 flex gap-2 items-center  "
             >
               <GoHistory />
@@ -68,7 +68,7 @@ function Dropdown() {
           </Menu.Item>
           <Menu.Item disabled>
             <NavLink
-              to="/hourly"
+              to="/astronomy"
               className="text-xl lg:text-2xl p-1  flex gap-2 items-center"
             >
               <BsMoonStars />

@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       minWidth: {
         '48': '12rem',
+        '500': '500px',
         '750': '750px'
       },
       width: {

@@ -44,10 +44,10 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 justify-center md:flex-row p-4 text-white">
+    <div className="flex flex-col gap-4 justify-center md:flex-row p-4 text-white  ">
       <section
         // style={{ backgroundImage: `url(${background})` }}
-        className="bg-[#217abc] p-10"
+        className="bg-[#217abc] p-10 lg:min-w-750"
       >
         <p className="text-xl pb-8 lg:text-3xl">
           Current Weather, <b>{nameOfDay}</b>{" "}

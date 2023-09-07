@@ -101,6 +101,9 @@ const HourlyWeather: FC = () => {
         data: tempDay,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
+        pointStyle: "rectRounded",
+        pointRadius: 4,
+        pointHoverRadius: 10,
       },
     ],
   };
@@ -111,7 +114,10 @@ const HourlyWeather: FC = () => {
         label: "Chance of rain",
         data: chanceOfRainDay,
         borderColor: "blue",
-        backgroundColor: "lightblue",
+        backgroundColor: "rgba(60, 99, 132, 0.5)",
+        pointStyle: "rectRounded",
+        pointRadius: 4,
+        pointHoverRadius: 10,
       },
     ],
   };
@@ -123,6 +129,9 @@ const HourlyWeather: FC = () => {
         data: windDay,
         borderColor: "grey",
         backgroundColor: "lightgrey",
+        pointStyle: "rectRounded",
+        pointRadius: 4,
+        pointHoverRadius: 10,
       },
     ],
   };
