@@ -15,6 +15,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import getNameOfDay from "../utils/getNameOfDay";
 
 ChartJS.register(
   CategoryScale,
@@ -131,7 +132,7 @@ const HourlyWeather: FC = () => {
       <div className="lg:w-750">
         <p className=" text-center text-3xl">
           {" "}
-          Hourly Weather <b>{city}</b>
+          Hourly Weather, <b>{city}</b>
         </p>
         <div className="flex gap-5 justify-center">
           <button
@@ -139,19 +140,19 @@ const HourlyWeather: FC = () => {
             className="bg-white p-2 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg focus:bg-green-400 "
             onClick={() => setDay(0)}
           >
-            Today
+            {getNameOfDay(data[0]?.date)}
           </button>
           <button
             className="bg-white p-2 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg  focus:bg-green-400"
             onClick={() => setDay(1)}
           >
-            Tommorow
+            {getNameOfDay(data[1]?.date)}
           </button>
           <button
             className="bg-white p-2 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg  focus:bg-green-400"
             onClick={() => setDay(2)}
           >
-            The day after tomorrow
+            {getNameOfDay(data[2]?.date)}
           </button>
         </div>
 

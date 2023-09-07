@@ -2,7 +2,16 @@ import { Menu, Transition } from "@headlessui/react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
-import background from "../assets/sky.jpg";
+
+import {
+  AiOutlineClose,
+  AiOutlineHome,
+  AiOutlineClockCircle,
+} from "react-icons/ai";
+
+import { GoHistory } from "react-icons/go";
+import { BsMoonStars, BsGithub, BsLinkedin } from "react-icons/bs";
+
 function Dropdown() {
   return (
     <Menu>
@@ -18,42 +27,71 @@ function Dropdown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items
-          style={{ backgroundImage: `url(${background})` }}
-          className=" flex flex-col gap-1 p-1  fixed z-50 right-4 bg-opacity-50 text-white rounded-lg border "
-        >
+        <Menu.Items className=" bg-[#475164] h-full flex flex-col gap-4 fixed z-50 right-0 top-0 p-5  text-white border-l border-black ">
+          <Menu.Item>
+            {({ close }) => (
+              <div
+                className="flex justify-end text-2xl h-20 mt-4 -mr-2"
+                onClick={close}
+              >
+                <AiOutlineClose />
+              </div>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink
+              to="/"
+              className="text-xl lg:text-2xl p-1 flex gap-2 items-center  "
+            >
+              <AiOutlineHome />
+              <b>Main Page</b>
+            </NavLink>
+          </Menu.Item>
           <Menu.Item>
             <NavLink
               to="/hourly"
-              className="text-xl lg:text-2xl p-1 bg-white bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg"
+              className="text-xl lg:text-2xl p-1 flex gap-2 items-center  "
             >
-              <b>Pogoda godzinowa</b>
+              <AiOutlineClockCircle />
+              <b>Hourly Weather</b>
             </NavLink>
           </Menu.Item>
 
           <Menu.Item disabled>
             <NavLink
               to="/hourly"
-              className="text-xl lg:text-2xl p-1  bg-white bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg"
+              className="text-xl lg:text-2xl p-1 flex gap-2 items-center  "
             >
-              <b>Marine</b>
-            </NavLink>
-          </Menu.Item>
-          <Menu.Item disabled>
-            <NavLink
-              to="/hourly"
-              className="text-xl lg:text-2xl p-1  bg-white bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg "
-            >
+              <GoHistory />
               <b>Historical</b>
             </NavLink>
           </Menu.Item>
           <Menu.Item disabled>
             <NavLink
               to="/hourly"
-              className="text-xl lg:text-2xl p-1  bg-white bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg"
+              className="text-xl lg:text-2xl p-1  flex gap-2 items-center"
             >
+              <BsMoonStars />
               <b>Astronomy</b>
             </NavLink>
+          </Menu.Item>
+          <Menu.Item disabled>
+            <a
+              href="https://github.com/PatrykSiemieniec/weather_app"
+              className="text-xl lg:text-2xl p-1  flex gap-2 items-center mt-auto"
+            >
+              <BsGithub />
+              <b>Github</b>
+            </a>
+          </Menu.Item>
+          <Menu.Item disabled>
+            <a
+              href="https://www.linkedin.com/in/patryksiemieniec99/"
+              className="text-xl lg:text-2xl p-1  flex gap-2 items-center"
+            >
+              <BsLinkedin />
+              <b>LinkedIn</b>
+            </a>
           </Menu.Item>
         </Menu.Items>
       </Transition>

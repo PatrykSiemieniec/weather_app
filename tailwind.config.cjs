@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       minWidth: {
-        '48': '12rem'
+        '48': '12rem',
+        '750': '750px'
       },
       width: {
         "600": '600px',

@@ -44,17 +44,17 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 justify-center md:flex-row p-2 text-white">
+    <div className="flex flex-col gap-4 justify-center md:flex-row p-4 text-white">
       <section
-        style={{ backgroundImage: `url(${background})` }}
-        className="p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg "
+        // style={{ backgroundImage: `url(${background})` }}
+        className="bg-[#217abc] p-10"
       >
         <p className="text-xl pb-8 lg:text-3xl">
           Current Weather, <b>{nameOfDay}</b>{" "}
         </p>
 
         <div className="flex flex-col justify-evenly gap-10 sm:flex-row ">
-          <div className="text-xl">
+          <div className="text-xl ">
             <p className="text-xl">Your location</p>
             <div className="flex gap-2 items-center">
               <h1 className="text-4xl">{data?.location?.name}</h1>
@@ -94,8 +94,8 @@ const Home = () => {
       </section>
 
       <section
-        style={{ backgroundImage: `url(${background})` }}
-        className=" p-10 bg-opacity-20  rounded backdrop-blur-lg drop-shadow-lg "
+        // style={{ backgroundImage: `url(${background})` }}
+        className=" bg-[#217abc] p-10   rounded backdrop-blur-lg drop-shadow-lg "
       >
         <div className="flex gap-4 flex-col ">
           <p className=" text-xl lg:text-2xl">Forecast</p>

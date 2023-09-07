@@ -75,12 +75,22 @@ const DailyWeather: FC = () => {
 
 const DailyWeatherItems: FC<DailyWeatherItemsProps> = (props) => {
   return (
-    <div className=" bg-white bg-opacity-20 p-3  rounded backdrop-blur-lg drop-shadow-lg flex flex-wrap w-full justify-center flex-col items-center ">
-      <div className="flex text-center flex-col gap-3 w-64 ">
-        <section className="flex justify-around">
-          <img style={{ width: "100px", height: "100px" }} src={props.icon} />
+    <div className=" bg-white bg-opacity-20 p-6  rounded backdrop-blur-lg drop-shadow-lg flex flex-wrap w-full justify-center flex-col items-center  ">
+      <div className="flex  flex-col gap-3  ">
+        <section className="flex justify-center ">
+          <img
+            style={{
+              position: "fixed",
+              left: "-10px",
+              top: "-10px",
+              width: "80px",
+              height: "80px",
+              zIndex: "-100",
+            }}
+            src={props.icon}
+          />
           <div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center ">
               <b className=" text-lg">{props.nameOfDay}</b>
               <em className=" text-sm">{props.date}</em>
             </div>
@@ -96,7 +106,7 @@ const DailyWeatherItems: FC<DailyWeatherItemsProps> = (props) => {
                 °C
               </span>
             </div>
-            <div className="flex justify-around">
+            <div className="flex  justify-around">
               <div className="flex">
                 <TbWind
                   style={{
@@ -117,7 +127,7 @@ const DailyWeatherItems: FC<DailyWeatherItemsProps> = (props) => {
           </div>
         </section>
 
-        <section className="flex justify-evenly">
+        <section className="flex justify-center gap-1">
           <span className="flex">
             <TbSunset
               style={{
