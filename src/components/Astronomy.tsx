@@ -57,7 +57,7 @@ const Astronomy = () => {
 
   console.log(moonPhases);
   return (
-    <div className="min-h-screen min-w-screen flex items-center flex-col gap-2 bg-cover">
+    <div className="min-h-screen min-w-screen flex items-center flex-col gap-2 bg-cover bg-black">
       <LazyLoadImage
         src={stars}
         placeholderSrc={starsPlaceholder}
@@ -66,7 +66,10 @@ const Astronomy = () => {
       />
 
       <div className="text-white w-72 h-72 mt-32 z-20">
-        <img src={moonPhases[data?.moon_phase]} alt={data?.moon_phase} />
+        <LazyLoadImage
+          src={moonPhases[data?.moon_phase]}
+          alt={data?.moon_phase}
+        />
       </div>
       <div className="text-white z-20 flex flex-col items-center gap-8 p-6  justify-center text-center">
         <div className="flex flex-col items-center gap-4">
