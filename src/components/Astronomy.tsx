@@ -3,7 +3,9 @@ import { useQuery } from "react-query";
 import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import stars from "../assets/stars.png";
+import starsPlaceholder from "../assets/starsPlaceholder.jpg";
 import { WiMoonrise, WiMoonset } from "react-icons/wi";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import FullMoon from "../assets/moonPhases/Full Moon.png";
 import NewMoon from "../assets/moonPhases/New Moon.png";
@@ -56,11 +58,13 @@ const Astronomy = () => {
   console.log(moonPhases);
   return (
     <div className="min-h-screen min-w-screen flex items-center flex-col gap-2 bg-cover">
-      <img
+      <LazyLoadImage
         src={stars}
+        placeholderSrc={starsPlaceholder}
         alt="Background"
         className="absolute inset-0 w-full h-screen object-cover  z-0"
       />
+
       <div className="text-white w-72 h-72 mt-32 z-20">
         <img src={moonPhases[data?.moon_phase]} alt={data?.moon_phase} />
       </div>
