@@ -75,8 +75,8 @@ const DailyWeather: FC = () => {
 
 const DailyWeatherItems: FC<DailyWeatherItemsProps> = (props) => {
   return (
-    <div className=" bg-white bg-opacity-20 p-6  rounded backdrop-blur-lg drop-shadow-lg flex flex-wrap w-full justify-center flex-col items-center  ">
-      <div className="flex  flex-col gap-3  ">
+    <div className=" bg-white bg-opacity-20 p-6  rounded backdrop-blur-lg drop-shadow-lg flex flex-wrap w-full justify-center flex-col items-center ">
+      <div className="flex  flex-col gap-3 ">
         <section className="flex justify-center ">
           <img
             style={{

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --header-height: 72px; /* Change this to match your header's height */
+}
+
 body {
   /* background-color: rgb(210, 217, 225); */
   /* background-color: white; */

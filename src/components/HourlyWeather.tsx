@@ -137,8 +137,8 @@ const HourlyWeather: FC = () => {
   };
 
   return (
-    <div className="flex justify-center p-5">
-      <div className="lg:w-750">
+    <div className="flex justify-center p-5 ">
+      <div className="lg:w-750 mt-20 flex flex-col gap-3">
         <p className=" text-center text-3xl">
           {" "}
           Hourly Weather, <b>{city}</b>

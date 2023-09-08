@@ -46,9 +46,9 @@ const Header = () => {
   }, []);
   //bg-gray-700
   return (
-    <div className=" flex bg-[#3C4453] text-white  ">
+    <div className=" flex bg-[#3C4453] text-white fixed w-screen z-50 ">
       <div className="flex w-full flex-row p-4 justify-between items-center placeholder:sm:gap-10  sm:ml-12 sm:mr-12  ">
-        <div className="flex flex-col sm:flex-row sm:gap-10">
+        <div className="flex gap-4  sm:gap-10 items-center">
           <NavLink to="/" className="text-2xl lg:text-3xl">
             <b>Weather</b>
           </NavLink>

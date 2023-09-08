@@ -1,14 +1,14 @@
 const getNameOfDay = (date: Date | string | number) => {
-  const dayNumber = new Date(date).getDay() - 1;
+  const dayNumber = new Date(date).getDay();
 
   const weekDays = [
+    "Sunday",
     "Monday",
     "Tueasday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
 
   return weekDays[dayNumber];
