@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import axios from "axios";
 import DailyWeather from "./DailyWeather";
 import SavedLocations from "./SavedLocations";
@@ -8,7 +8,6 @@ import { useQuery } from "react-query";
 import getNameOfDay from "../utils/getNameOfDay";
 import { useDispatch } from "react-redux/es/exports";
 import { refreshLocalStorage } from "../store/citySlice";
-import background from "../assets/sky.jpg";
 const Home = () => {
   const [nameOfDay, setNameOfDay] = useState<string>("");
 

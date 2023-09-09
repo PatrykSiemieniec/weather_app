@@ -17,6 +17,23 @@ module.exports = {
       },
       backgroundImage: {
         'sky': "url(./src/assets/sky.jpg)"
+      },
+      keyframes: {
+        typing: {
+          "0%": {
+            width: "0%",
+            visibility: "hidden"
+          },
+          "100%": {
+            width: "100%",
+          }
+        },
+
+      },
+      animation: {
+        appear: 'fadeIn 2s linear',
+        move: 'fadeImg 2s linear',
+        typing: "typing 2s steps(20)  alternate "
       }
 
     },

@@ -2,10 +2,13 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
-import stars from "../assets/stars.png";
-import starsPlaceholder from "../assets/starsPlaceholder.jpg";
+
 import { WiMoonrise, WiMoonset } from "react-icons/wi";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { DotSpinner } from "@uiball/loaders";
+
+import stars from "../assets/stars.png";
+import starsPlaceholder from "../assets/starsPlaceholder.jpg";
 
 import FullMoon from "../assets/moonPhases/Full Moon.png";
 import NewMoon from "../assets/moonPhases/New Moon.png";
@@ -34,11 +37,10 @@ const Astronomy = () => {
       }
     );
 
-    console.log(response.data.astronomy.astro);
     return response.data.astronomy.astro;
   };
 
-  const { isLoading, data, error } = useQuery(["astronomy", city], () =>
+  const { isLoading, data, isError } = useQuery(["astronomy", city], () =>
     getAstronomy(city)
   );
 
@@ -55,17 +57,16 @@ const Astronomy = () => {
     "Waxing Gibbous": WaxingGibbous,
   };
 
-  console.log(moonPhases);
-  return (
-    <div className="min-h-screen min-w-screen flex items-center flex-col gap-2 bg-cover bg-black">
-      <LazyLoadImage
-        src={stars}
-        placeholderSrc={starsPlaceholder}
-        alt="Background"
-        className="absolute inset-0 w-full h-screen object-cover  z-0"
-      />
+  const loadingContent = <DotSpinner size={25} speed={0.9} color="white" />;
+  const errorContent = (
+    <div className="flex items-center justify-center mt-40 text-4xl z-50 text-white">
+      <p>Something went wrong...</p>
+    </div>
+  );
 
-      <div className="text-white w-72 h-72 mt-32 z-20">
+  const componentContent = (
+    <>
+      <div className="text-white w-72 h-72 mt-32 z-20 animate-appear">
         <LazyLoadImage
           src={moonPhases[data?.moon_phase]}
           alt={data?.moon_phase}
@@ -73,12 +74,14 @@ const Astronomy = () => {
       </div>
       <div className="text-white z-20 flex flex-col items-center gap-8 p-6  justify-center text-center">
         <div className="flex flex-col items-center gap-4">
-          <span className=" text-4xl md:text-6xl">{data?.moon_phase}</span>
+          <span className="animate-typing overflow-hidden whitespace-nowrap text-3xl md:text-5xl text-white font-bold">
+            {isLoading ? loadingContent : data?.moon_phase}
+          </span>
           <span>Moon Phase</span>
         </div>
         <div className="flex flex-col items-center gap-1">
           <span className=" text-3xl md:text-5xl">
-            {data?.moon_illumination}%
+            {isLoading ? loadingContent : data?.moon_illumination + "%"}
           </span>
           <span>Moon Illumination</span>
         </div>
@@ -93,6 +96,18 @@ const Astronomy = () => {
           </span>
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <div className="min-h-screen min-w-screen flex items-center flex-col gap-2 bg-cover bg-black">
+      <LazyLoadImage
+        src={stars}
+        placeholderSrc={starsPlaceholder}
+        alt="Background"
+        className="absolute inset-0 w-full h-screen object-cover z-0 animate-move"
+      />
+      {isError ? errorContent : componentContent}
     </div>
   );
 };

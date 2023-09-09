@@ -29,7 +29,6 @@ const Header = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setSuggestedCity(res.data);
       });
   };

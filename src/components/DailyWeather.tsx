@@ -43,13 +43,12 @@ const DailyWeather: FC = () => {
     });
 
     dispatch(setHoursData(response.data.forecast.forecastday));
-    const forecast = response.data.forecast.forecastday.slice(1, 3);
-    return forecast;
+
+    return response.data.forecast.forecastday.slice(1, 3);
   };
   const { isLoading, data, error } = useQuery(["forecast", city], () =>
     fetchForecastData(city)
   );
-  console.log(data);
 
   if (isLoading) return <p>Loading...</p>;
 
