@@ -144,19 +144,19 @@ const HourlyWeather: FC = () => {
         <div className="flex gap-5 justify-center">
           <button
             ref={todayButtonRef}
-            className="bg-white p-2 bg-opacity-20 border-black border  rounded backdrop-blur-lg drop-shadow-lg focus:bg-green-400 "
+            className="bg-white p-2 bg-opacity-20 border-black border  rounded backdrop-blur-lg drop-shadow-lg focus:bg-green-400 focus:border-green-700 "
             onClick={() => setDay(0)}
           >
             {data ? getNameOfDay(data[0]?.date) : ""}
           </button>
           <button
-            className="bg-white p-2 bg-opacity-20  border-black border  rounded backdrop-blur-lg drop-shadow-lg  focus:bg-green-400"
+            className="bg-white p-2 bg-opacity-20  border-black border  rounded backdrop-blur-lg drop-shadow-lg  focus:bg-green-400  focus:border-green-700 "
             onClick={() => setDay(1)}
           >
             {data ? getNameOfDay(data[1]?.date) : ""}
           </button>
           <button
-            className="bg-white p-2 bg-opacity-20  border-black border  rounded backdrop-blur-lg drop-shadow-lg  focus:bg-green-400"
+            className="bg-white p-2 bg-opacity-20  border-black border  rounded backdrop-blur-lg drop-shadow-lg  focus:bg-green-400  focus:border-green-700 "
             onClick={() => setDay(2)}
           >
             {data ? getNameOfDay(data[2]?.date) : ""}

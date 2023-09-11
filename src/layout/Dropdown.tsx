@@ -57,7 +57,7 @@ function Dropdown() {
             </NavLink>
           </Menu.Item>
 
-          <Menu.Item disabled>
+          <Menu.Item>
             <NavLink
               to="/historical"
               className="text-xl lg:text-2xl p-1 flex gap-2 items-center  "
@@ -66,7 +66,7 @@ function Dropdown() {
               <b>Historical</b>
             </NavLink>
           </Menu.Item>
-          <Menu.Item disabled>
+          <Menu.Item>
             <NavLink
               to="/astronomy"
               className="text-xl lg:text-2xl p-1  flex gap-2 items-center"
@@ -75,7 +75,7 @@ function Dropdown() {
               <b>Astronomy</b>
             </NavLink>
           </Menu.Item>
-          <Menu.Item disabled>
+          <Menu.Item>
             <a
               href="https://github.com/PatrykSiemieniec/weather_app"
               className="text-xl lg:text-2xl p-1  flex gap-2 items-center mt-auto"
@@ -84,7 +84,7 @@ function Dropdown() {
               <b>Github</b>
             </a>
           </Menu.Item>
-          <Menu.Item disabled>
+          <Menu.Item>
             <a
               href="https://www.linkedin.com/in/patryksiemieniec99/"
               className="text-xl lg:text-2xl p-1  flex gap-2 items-center"

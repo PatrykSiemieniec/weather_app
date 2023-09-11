@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./layout/Header";
 
 import { DotSpinner } from "@uiball/loaders";
+import NotFoundPage from "./components/NotFoundPage";
 
 const Astronomy = lazy(() => import("./components/Astronomy"));
 const Historical = lazy(() => import("./components/Historical"));
@@ -52,6 +53,7 @@ function App() {
               </Suspense>
             }
           ></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
         </Routes>
       </main>
     </div>

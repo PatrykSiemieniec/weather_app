@@ -9,11 +9,13 @@ module.exports = {
       minWidth: {
         '48': '12rem',
         '500': '500px',
-        '750': '750px'
+        '750': '750px',
+        "200": '200px'
       },
       width: {
         "600": '600px',
-        '750': '750px'
+        '750': '750px',
+
       },
       backgroundImage: {
         'sky': "url(./src/assets/sky.jpg)"

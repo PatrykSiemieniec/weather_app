@@ -48,18 +48,26 @@ const Header = () => {
     <div className=" flex bg-[#3C4453] text-white fixed w-screen z-50 ">
       <div className="flex w-full flex-row p-4 justify-between items-center placeholder:sm:gap-10  sm:ml-12 sm:mr-12  ">
         <div className="flex gap-4  sm:gap-10 items-center">
-          <NavLink to="/" className="text-2xl lg:text-3xl">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? " border-b borderd-white text-xl lg:text-2xl"
+                : "text-xl lg:text-2xl"
+            }
+          >
             <b>Weather</b>
           </NavLink>
           <div>
             <input
+              id="searchCity"
               onChange={searchAndAutocomplete}
               type="search"
-              className=" h-10 w-48 p-4 text-black"
+              className=" h-10 w-40 sm:w-48 p-4 text-black"
               placeholder="Search city..."
               value={inputValue}
             />
-            <div className="flex flex-col absolute min-w-48 bg-white text-black  z-50">
+            <div className="flex flex-col absolute min-w-48 bg-white text-black z-50 border-black border">
               {inputValue &&
                 suggestedCity.map((item) => (
                   <span
@@ -68,11 +76,13 @@ const Header = () => {
                       setSuggestedCity([]);
                       setInputValue("");
                     }}
-                    className="p-2 cursor-pointer"
+                    className="p-2 cursor-pointer text-lg  hover:bg-slate-200"
                     key={item.id}
                   >
                     {item.name}{" "}
-                    <sub className=" text-slate-500">{item.country}</sub>
+                    <sub className=" text-slate-500 text-sm">
+                      {item.country}
+                    </sub>
                   </span>
                 ))}
             </div>
@@ -81,14 +91,35 @@ const Header = () => {
         <div>
           {width > 1150 ? (
             <div className="flex gap-10 items-center">
-              <NavLink to="/hourly" className="text-xl lg:text-2xl">
+              <NavLink
+                to="/hourly"
+                className={({ isActive }) =>
+                  isActive
+                    ? " border-b borderd-white text-xl lg:text-2xl"
+                    : "text-xl lg:text-2xl"
+                }
+              >
                 <b>Hourly Weather</b>
               </NavLink>
 
-              <NavLink to="/historical" className="text-xl lg:text-2xl">
+              <NavLink
+                to="/historical"
+                className={({ isActive }) =>
+                  isActive
+                    ? " border-b borderd-white text-xl lg:text-2xl"
+                    : "text-xl lg:text-2xl"
+                }
+              >
                 <b>Historical</b>
               </NavLink>
-              <NavLink to="/astronomy" className="text-xl lg:text-2xl">
+              <NavLink
+                to="/astronomy"
+                className={({ isActive }) =>
+                  isActive
+                    ? " border-b borderd-white text-xl lg:text-2xl"
+                    : "text-xl lg:text-2xl"
+                }
+              >
                 <b>Astronomy</b>
               </NavLink>
               <div className="flex gap-3">
