@@ -117,13 +117,13 @@ const Historical = () => {
                 </div>
               </div>
               <div>
-                <div className="border-b-2">{data?.date}</div>
+                <div>{data?.date}</div>
                 <h2 className=" text-lg">
                   Temperature:
-                  <div className=" text-2xl font-bold flex gap-3 items-center ">
+                  <div className=" text-2xl font-bold flex gap-3 ">
                     {data?.day?.maxtemp_c} °C
-                    <sub>{data?.day.mintemp_c} °C</sub>
                   </div>
+                  <div className="text-lg">{data?.day.mintemp_c} °C</div>
                 </h2>
                 <h2>Wind: {data?.day?.maxwind_kph}kph</h2>
               </div>
