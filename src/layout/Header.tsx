@@ -8,6 +8,7 @@ import Dropdown from "./Dropdown";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 const Header = () => {
   const [suggestedCity, setSuggestedCity] = useState<suggestedCity[]>([]);
+  const [noResult, setNoResult] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [width, setWidth] = useState<number>(window.innerWidth);
 
@@ -43,7 +44,6 @@ const Header = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  //bg-gray-700
   return (
     <div className=" flex bg-[#3C4453] text-white fixed w-screen z-50 ">
       <div className="flex w-full flex-row p-4 justify-between items-center placeholder:sm:gap-10  sm:ml-12 sm:mr-12  ">
@@ -67,7 +67,8 @@ const Header = () => {
               placeholder="Search city..."
               value={inputValue}
             />
-            <div className="flex flex-col absolute min-w-48 bg-white text-black z-50 border-black border">
+
+            <div className="flex flex-col absolute min-w-48 bg-white text-black z-50 ">
               {inputValue &&
                 suggestedCity.map((item) => (
                   <span

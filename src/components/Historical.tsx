@@ -53,6 +53,7 @@ const Historical = () => {
   const labels = data?.hour?.map((item: Hour) => item.time.slice(10, 16));
   const windData = data?.hour?.map((item: Hour) => item.wind_kph);
   const tempData = data?.hour?.map((item: Hour) => item.temp_c);
+  const rainData = data?.hour?.map((item: Hour) => item.chance_of_rain);
 
   const chartData = {
     labels,
@@ -67,10 +68,19 @@ const Historical = () => {
         pointHoverRadius: 10,
       },
       {
-        label: "Temp",
+        label: "Temperature",
         data: tempData,
-        borderColor: "red",
-        backgroundColor: "red",
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        pointStyle: "rectRounded",
+        pointRadius: 4,
+        pointHoverRadius: 10,
+      },
+      {
+        label: "Chance Of Rain",
+        data: rainData,
+        borderColor: "blue",
+        backgroundColor: "lightblue",
         pointStyle: "rectRounded",
         pointRadius: 4,
         pointHoverRadius: 10,
@@ -97,17 +107,17 @@ const Historical = () => {
             </button>
           ))}
         </section>
-        <section className="flex justify-evenly gap-10">
-          <div className="border rounded border-black p-5 w-1/3">
+        <section className="flex justify-evenly gap-10 flex-col md:flex-row ">
+          <div className="border rounded border-black p-5 w-full md:w-1/3 flex items-center justify-evenly">
             {" "}
             <>
               <div className="text-xl ">
-                <div className="flex items-center ">
+                <div className="flex items-center flex-col">
                   <img className=" w-32" src={data?.day?.condition?.icon}></img>
-                  <p>{data?.day?.condition?.text}</p>
                 </div>
               </div>
               <div>
+                <div className="border-b-2">{data?.date}</div>
                 <h2 className=" text-lg">
                   Temperature:
                   <div className=" text-2xl font-bold flex gap-3 items-center ">
@@ -119,7 +129,7 @@ const Historical = () => {
               </div>
             </>
           </div>
-          <div className="border rounded border-black p-5 w-2/3">
+          <div className="border rounded border-black p-5 md:p-5 w-full md:w-2/3">
             <Line options={options} data={chartData} />
           </div>
         </section>
